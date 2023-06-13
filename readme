@@ -1,0 +1,17 @@
+task 2
+
+
+solution 1
+
+UPDATE full_names
+SET status=subq.status
+FROM (SELECT name, status FROM short_names) AS subq
+WHERE subq.name = SUBSTRING(full_names.name, 1,  STRPOS(full_names.name, '.')-1);
+
+
+solution 2
+
+UPDATE full_names
+SET status=sn.status
+FROM short_names sn
+JOIN full_names as fn ON substring(fn.name, 0,  STRPOS (fn.name, '.')-1) = sn.name;
